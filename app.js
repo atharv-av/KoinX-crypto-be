@@ -14,6 +14,10 @@ app.use("/api/v1", cryptoRoutes)
 
 const port = process.env.PORT;
 
+app.get("/", (req, res) => {
+    res.send("Hello KoinX. Please visit /api/v1/stats or /api/v1/deviation")
+})
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   connectDB()
