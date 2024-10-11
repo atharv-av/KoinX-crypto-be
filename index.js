@@ -19,7 +19,7 @@ app.listen(port, () => {
   connectDB()
 });
 
-cron.schedule('* * * * *', async () => {
+cron.schedule('0 */2 * * *', async () => {
     const coins = ['bitcoin', 'matic-network', 'ethereum'];
 
     for (let coin of coins) {
@@ -28,13 +28,13 @@ cron.schedule('* * * * *', async () => {
 
             const { usd: price } = response.data.market_data.current_price;
             const { usd: marketCap } = response.data.market_data.market_cap;
-            const change24h = response.data.market_data.price_change_percentage_24h;
+            const change24h  = response.data.market_data.price_change_percentage_24h;
 
             const cryptoData = new Crypto({
                 coinId: coin,
                 price,
                 marketCap,
-                change24h
+                change24h 
             });
             await cryptoData.save();
         } catch (error) {
